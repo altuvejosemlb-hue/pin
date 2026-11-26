@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart Rewards Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0071ce 0%, #004c91 40%, #002d5c 70%, #001a33 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 36px 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-section img {
+            max-width: 160px;
+            height: auto;
+            filter: brightness(1.15) contrast(1.1) drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
+
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .title .highlight {
+            color: #ffc220;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+
+        .subtitle .amount {
+            color: #ffc220;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .steps-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 18px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 14px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 194, 32, 0.2);
+            transform: translateX(4px);
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0071ce, #005bb5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
+        }
+
+        .step-text {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffc220, #ff9800);
+            color: #0a1628;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 194, 32, 0.25);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 194, 32, 0.35);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .social-proof {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .social-proof .avatars {
+            display: flex;
+        }
+
+        .social-proof .avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 2px solid #001a33;
+            margin-left: -6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .social-proof .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .faq-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .faq-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 14px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: #ffc220;
+        }
+
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: #ffc220;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 12.5px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 120px;
+            padding-bottom: 14px;
+        }
+
+        .footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.35);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #ffc220;
+        }
+
+        .footer .dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Animaciones de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container > * {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .container > *:nth-child(1) { animation-delay: 0.1s; }
+        .container > *:nth-child(2) { animation-delay: 0.15s; }
+        .container > *:nth-child(3) { animation-delay: 0.2s; }
+        .container > *:nth-child(4) { animation-delay: 0.25s; }
+        .container > *:nth-child(5) { animation-delay: 0.3s; }
+        .container > *:nth-child(6) { animation-delay: 0.35s; }
+        .container > *:nth-child(7) { animation-delay: 0.4s; }
+        .container > *:nth-child(8) { animation-delay: 0.45s; }
+        .container > *:nth-child(9) { animation-delay: 0.5s; }
+        .container > *:nth-child(10) { animation-delay: 0.55s; }
+
+        /* Partículas flotantes de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 194, 32, 0.15);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="logo-section">
+            <img src="https://www.freeiconspng.com/uploads/walmart-logo-png-6.png" alt="Walmart Logo">
+        </div>
+
+        <h1 class="title"><span class="highlight">Walmart</span> Rewards Program</h1>
+        <p class="subtitle">
+            Complete a few simple steps and receive a gift card reward worth up to <span class="amount">$750</span>
+        </p>
+
+        <div class="steps-title">How To Claim Your Gift Card</div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Click on "CLAIM NOW" below</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">Enter your email and basic information</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">Complete 3-5 recommended deals</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">Claim reward in your email</div>
+            </div>
+        </div>
+
+        <a href="https://linkthem.net/?offer_id=1913&aff_id=33556" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
+            <button class="cta-button" type="button">
+                Claim Now
+            </button>
+        </a>
+
+        <div class="social-proof">
+            <div class="avatars">
+                <div class="avatar">J</div>
+                <div class="avatar">M</div>
+                <div class="avatar">A</div>
+                <div class="avatar">S</div>
+            </div>
+            Join thousands of satisfied customers
+        </div>
+
+        <div class="faq-section">
+            <div class="faq-title">Frequently Asked Questions</div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How long do the deals take?
+                    <span class="faq-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    Most deals are completed in less than 5 minutes. Some may require more time depending on the type of offer.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What are deals?
+                    <span class="faq-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    Deals are sponsored activities such as signing up on websites, downloading apps, or completing surveys.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How many deals do I have to do?
+                    <span class="faq-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    You must complete between 3 and 5 recommended offers to be eligible for your reward.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    When will I receive my reward?
+                    <span class="faq-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    Your reward will be sent by email within 24-48 hours after completing all required offers.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="#">User Agreement</a>
+            <span class="dot"></span>
+            <a href="#">Privacy Policy</a>
+            <span class="dot"></span>
+            <a href="#">Walmart.com</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+            // Open clicked if not active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Generate floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particle.style.width = (2 + Math.random() * 4) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
